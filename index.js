@@ -47,26 +47,36 @@ function add(url) {
   map.set(key, url);
 }
 
-app.get('/', (req, res) => {
-  res.json({ size: map.size, urls: Object.fromEntries(map) });
-});
-
-app.get('/add', (req, res) => {
-  add('asos.com');
-  add('zara.com');
-  add('mango.com');
-  add('pullandbear.com');
-  add('hm.com');
-  add('weekday.com');
-  add('nike.com');
-  add('urbanoutfitters.com');
-  add('bape.com');
-  add('aelfriceden.co.uk');
+function addMock() {
+  add('www.asos.com');
+  add('www.zara.com');
+  add('www.mango.com');
+  add('www.pullandbear.com');
+  add('www1.hm.com');
+  add('www2.hm.com');
+  add('www3.hm.com');
+  add('www.weekday.com');
+  add('www.nike.com');
+  add('www.urbanoutfitters.com');
+  add('www.bape.com');
+  add('www.aelfriceden.co.uk');
 
   for (let i = 0; i < 1000; i++) {
     add(`${makeid(12)}.com`);
   }
 
+}
+
+app.get('/', (req, res) => {
+
+  if(map.size == 0) {
+    addMock();
+  }
+  res.json({ size: map.size, urls: Object.fromEntries(map) });
+});
+
+app.get('/add', (req, res) => {
+  addMock();
   res.json({ size: map.size, urls: Object.fromEntries(map) });
 });
 
