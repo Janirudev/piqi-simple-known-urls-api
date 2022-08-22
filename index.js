@@ -44,7 +44,7 @@ function URLtoInteger(url) {
 
 function add(url) {
   let key = URLtoInteger(url);
-  map.set(key, url);
+  map.set(parseInt(key), url);
 }
 
 function addMock() {
